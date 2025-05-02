@@ -1,0 +1,111 @@
+﻿@page "/number"
+@using System.Diagnostics
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<label>intast number</label>
+<input type="number" name="amountOfButtons" required @bind=amountOfButtons/>
+<button @onclick="startGame"> Start Game</button>
+<br/>
+
+@if (startTime != null)
+{
+    <p> @startTime.ToString()</p>
+}
+
+@if (endTime != null)
+{
+    <p> @endTime.ToString()</p>
+    <p> @differenceInTime.ToString()</p>
+}
+
+<div class="buttonsForNumbers">
+    @if (allNumbers != null)
+    {
+        foreach (int number in allNumbers)
+        {
+            <button @onclick="() => checkNumber(number)"> @number </button>
+        }
+    }
+</div>
+
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+
+<style>
+    .buttonsForNumbers {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 20px;
+    gap: 10px;
+    }
+</style>
+
+
+@code {
+    private int amountOfButtons;
+    private int[]? allNumbers;
+    private int highestNumber = 0;
+    private string? message;
+    private DateTime? startTime;
+    private DateTime? endTime;
+    private TimeSpan? differenceInTime;
+
+    private void startGame()
+    {
+        if (amountOfButtons == 0) return;
+
+        resetValues();
+
+        message = null;
+        endTime = null;
+        startTime = DateTime.Now;
+        int[] generatedAllNumbers = new int[amountOfButtons];
+
+        Random rng = new Random();
+        for (int i = 0; i < amountOfButtons; i++)
+        {
+            generatedAllNumbers[i] = rng.Next(1, 1000);
+            if (generatedAllNumbers[i] > highestNumber) highestNumber = generatedAllNumbers[i];
+        }
+        allNumbers = generatedAllNumbers;
+    }
+
+    private void checkNumber(int clickedNumber)
+    {
+        if (clickedNumber == highestNumber)
+        {
+            message = "Correct Quess";
+            endGame();
+        }
+        else message = "Wrong Quess";
+    }
+
+    private TimeSpan RoundSeconds(TimeSpan span)
+    {
+        return TimeSpan.FromSeconds(Math.Round(span.TotalSeconds));
+    }
+
+    private void endGame()
+    {
+        Debug.Assert(startTime != null, "startTime was null");
+        endTime = DateTime.Now;
+
+        TimeSpan differenceInTimes = (DateTime)startTime - (DateTime)endTime;
+        differenceInTime = RoundSeconds(differenceInTimes);
+
+        resetValues();
+        amountOfButtons = 0;
+    }
+
+    private void resetValues()
+    {
+        allNumbers = null;
+        highestNumber = 0;
+    }
+
+}
