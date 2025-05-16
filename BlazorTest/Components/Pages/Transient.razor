@@ -1,0 +1,30 @@
+﻿@page "/Transient"
+@inject IServiceProvider _serviceProvider;
+
+<PageTitle>Home</PageTitle>
+
+<h1>GUID: @_guid1</h1>
+
+<button @onclick="SetGuidButton">Hent ny GUID</button>
+
+@code {
+    private string? _guid1;
+
+    protected override void OnInitialized()
+    {
+        _guid1 = GetNewGuid();
+    }
+
+    private void SetGuidButton()
+    {
+        _guid1 = GetNewGuid();
+        StateHasChanged();
+    }
+
+    private string GetNewGuid()
+    {
+        var transient = _serviceProvider.GetRequiredService<ITransientService>();
+        return transient.GetGuid().ToString();
+    }
+
+}

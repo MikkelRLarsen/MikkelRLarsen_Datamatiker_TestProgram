@@ -1,4 +1,7 @@
 using BlazorTest.Components;
+using BlazorTest.ServiceLifeTimeTest.ScopedServiceFolder;
+using BlazorTest.ServiceLifeTimeTest.SingletongServiceFolder;
+using BlazorTest.ServiceLifeTimeTest.TransientServiceFolder;
 using Domain.Interfaces;
 using Services;
 
@@ -15,6 +18,10 @@ namespace BlazorTest
                 .AddInteractiveServerComponents();
             builder.Services.AddSingleton<ICounterService, CounterService>();
             builder.Services.AddSingleton<ICreateNumber, NewCreateNumber>();
+
+            builder.Services.AddSingleton<ISingletonService, SingletonService>();
+            builder.Services.AddScoped<IScopedService, ScopedService>();
+            builder.Services.AddTransient<ITransientService, TransientService>();
             
 
             var app = builder.Build();

@@ -1,0 +1,19 @@
+﻿@page "/Scoped"
+@inject IScopedService _scopedService;
+
+<PageTitle>Home</PageTitle>
+
+<h1>@_guid1</h1> <button onclick=""></button>
+<h1>@_guid2</h1>
+
+@code {
+    private string? _guid1;
+    private string? _guid2;
+
+    protected override void OnInitialized()
+    {
+        _guid1 = _scopedService.GetGuid().ToString();
+        _guid2 = _scopedService.GetGuid().ToString();
+    }
+
+}

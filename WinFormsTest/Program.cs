@@ -1,3 +1,5 @@
+using WinFormsTest.NavigationMenu;
+
 namespace WinFormsTest
 {
 	internal static class Program
@@ -11,7 +13,7 @@ namespace WinFormsTest
 			// To customize application configuration such as set high DPI settings or default font,
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
-			Application.Run(new FormUsedToTestNexPrevMenu());
+			Application.Run(new NavMenuForm());
 		}
 	}
 }
