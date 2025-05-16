@@ -22,7 +22,8 @@ namespace WinFormsTest.NavigationMenu
 
 		private void NavMenuForm_Load(object sender, EventArgs e)
 		{
-
+			examinationButton1.NavMenuMainPanel = NavMenuMainPanel;
+			examinationButton2.NavMenuMainPanel= NavMenuMainPanel;
 		}
 
 		private void NavigationsPanel_MouseDown(object sender, MouseEventArgs e)

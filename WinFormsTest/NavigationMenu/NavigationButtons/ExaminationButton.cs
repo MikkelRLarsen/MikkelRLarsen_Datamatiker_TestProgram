@@ -13,18 +13,19 @@ namespace WinFormsTest.NavigationMenu.NavigationButtons
 	public partial class ExaminationButton : UserControl
 	{
 		bool expand = false;
-		private readonly Panel _navMenuMainPanel;
+		public Panel? NavMenuMainPanel { get; set; }
 
-		public ExaminationButton(Panel navMenuMainPanel)
+		public ExaminationButton()
 		{
 			InitializeComponent();
-			_navMenuMainPanel = navMenuMainPanel;
 		}
 
 		private void OpretLabel_Click(object sender, EventArgs e)
 		{
-			_navMenuMainPanel.Controls.Clear();
-			_navMenuMainPanel.Controls.Add(new TestNextPrev());
+			if (NavMenuMainPanel == null) return;
+
+			NavMenuMainPanel.Controls.Clear();
+			NavMenuMainPanel.Controls.Add(new TestNextPrev());
 		}
 
 		private void FindLabel_Click(object sender, EventArgs e)

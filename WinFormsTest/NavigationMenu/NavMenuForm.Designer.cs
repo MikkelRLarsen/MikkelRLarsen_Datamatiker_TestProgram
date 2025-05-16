@@ -30,16 +30,18 @@
 		{
 			NavigationsPanel = new Panel();
 			NavMenuMainPanel = new Panel();
-			examinationButton1 = new NavigationButtons.ExaminationButton(NavMenuMainPanel);
+			examinationButton1 = new WinFormsTest.NavigationMenu.NavigationButtons.ExaminationButton();
+			examinationButton2 = new WinFormsTest.NavigationMenu.NavigationButtons.ExaminationButton();
+			examinationButton3 = new WinFormsTest.NavigationMenu.NavigationButtons.ExaminationButton();
 			SuspendLayout();
 			// 
 			// NavigationsPanel
 			// 
 			NavigationsPanel.BackColor = SystemColors.MenuHighlight;
-			NavigationsPanel.Location = new Point(242, 0);
+			NavigationsPanel.Location = new Point(743, 0);
 			NavigationsPanel.Margin = new Padding(0);
 			NavigationsPanel.Name = "NavigationsPanel";
-			NavigationsPanel.Size = new Size(1681, 70);
+			NavigationsPanel.Size = new Size(1718, 70);
 			NavigationsPanel.TabIndex = 0;
 			NavigationsPanel.MouseDown += NavigationsPanel_MouseDown;
 			NavigationsPanel.MouseMove += NavigationsPanel_MouseMove;
@@ -48,9 +50,9 @@
 			// NavMenuMainPanel
 			// 
 			NavMenuMainPanel.Dock = DockStyle.Bottom;
-			NavMenuMainPanel.Location = new Point(0, 73);
+			NavMenuMainPanel.Location = new Point(0, 329);
 			NavMenuMainPanel.Name = "NavMenuMainPanel";
-			NavMenuMainPanel.Size = new Size(1914, 971);
+			NavMenuMainPanel.Size = new Size(2500, 971);
 			NavMenuMainPanel.TabIndex = 1;
 			// 
 			// examinationButton1
@@ -59,14 +61,37 @@
 			examinationButton1.Location = new Point(0, 0);
 			examinationButton1.Margin = new Padding(0);
 			examinationButton1.Name = "examinationButton1";
+			examinationButton1.NavMenuMainPanel = null;
 			examinationButton1.Size = new Size(250, 70);
 			examinationButton1.TabIndex = 0;
+			// 
+			// examinationButton2
+			// 
+			examinationButton2.BackColor = SystemColors.MenuHighlight;
+			examinationButton2.Location = new Point(250, 0);
+			examinationButton2.Margin = new Padding(0);
+			examinationButton2.Name = "examinationButton2";
+			examinationButton2.NavMenuMainPanel = null;
+			examinationButton2.Size = new Size(250, 70);
+			examinationButton2.TabIndex = 2;
+			// 
+			// examinationButton3
+			// 
+			examinationButton3.BackColor = SystemColors.MenuHighlight;
+			examinationButton3.Location = new Point(500, 0);
+			examinationButton3.Margin = new Padding(0);
+			examinationButton3.Name = "examinationButton3";
+			examinationButton3.NavMenuMainPanel = null;
+			examinationButton3.Size = new Size(250, 70);
+			examinationButton3.TabIndex = 3;
 			// 
 			// NavMenuForm
 			// 
 			AutoScaleDimensions = new SizeF(10F, 25F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(1914, 1044);
+			ClientSize = new Size(2500, 1300);
+			Controls.Add(examinationButton3);
+			Controls.Add(examinationButton2);
 			Controls.Add(examinationButton1);
 			Controls.Add(NavMenuMainPanel);
 			Controls.Add(NavigationsPanel);
@@ -80,7 +105,9 @@
 		#endregion
 
 		private Panel NavigationsPanel;
-		private NavigationButtons.ExaminationButton examinationButton1;
 		private Panel NavMenuMainPanel;
+		private NavigationButtons.ExaminationButton examinationButton1;
+		private NavigationButtons.ExaminationButton examinationButton2;
+		private NavigationButtons.ExaminationButton examinationButton3;
 	}
 }
