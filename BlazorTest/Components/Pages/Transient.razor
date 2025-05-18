@@ -3,28 +3,20 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>GUID: @_guid1</h1>
+<h1>GUID from Singleton: @_guidSingleton</h1>
+<h1>GUID from Scoped: @_guidScoped</h1>
+<h1>GUID from Transient: @_guidTransient</h1>
 
-<button @onclick="SetGuidButton">Hent ny GUID</button>
 
 @code {
-    private string? _guid1;
+    private string? _guidTransient;
+    private string? _guidScoped;
+    private string? _guidSingleton;
 
     protected override void OnInitialized()
     {
-        _guid1 = GetNewGuid();
+        _guidTransient = _serviceProvider.GetRequiredService<ITransientService>().GetGuid().ToString();
+        _guidScoped = _serviceProvider.GetRequiredService<IScopedService>().GetGuid().ToString();
+        _guidSingleton = _serviceProvider.GetRequiredService<ISingletonService>().GetGuid().ToString();
     }
-
-    private void SetGuidButton()
-    {
-        _guid1 = GetNewGuid();
-        StateHasChanged();
-    }
-
-    private string GetNewGuid()
-    {
-        var transient = _serviceProvider.GetRequiredService<ITransientService>();
-        return transient.GetGuid().ToString();
-    }
-
 }

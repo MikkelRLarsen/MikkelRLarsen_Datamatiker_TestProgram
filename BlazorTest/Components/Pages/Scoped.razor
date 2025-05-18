@@ -1,19 +1,48 @@
 ﻿@page "/Scoped"
-@inject IScopedService _scopedService;
+@inject IServiceProvider _serviceProvider;
 
 <PageTitle>Home</PageTitle>
 
-<h1>@_guid1</h1> <button onclick=""></button>
-<h1>@_guid2</h1>
+<h1>GUID from Singleton: @_guidSingleton</h1>
+<h1>GUID from Scoped: @_guidScoped</h1>
+<h1>GUID from Transient: @_guidTransient</h1>
+
+<button class="btn btn-primary" @onclick="RefreshGuids">
+    Hent nye GUID’er
+</button>
+
+<h1>@test</h1>
+
 
 @code {
-    private string? _guid1;
-    private string? _guid2;
+    private string? _guidTransient;
+    private string? _guidScoped;
+    private string? _guidSingleton;
+    private string? test;
+
+    private ISingletonService _singletonService;
+    private IScopedService _scopedService;
+    private ITransientService _transientService;
 
     protected override void OnInitialized()
     {
-        _guid1 = _scopedService.GetGuid().ToString();
-        _guid2 = _scopedService.GetGuid().ToString();
+        _singletonService = _serviceProvider.GetRequiredService<ISingletonService>();
+        _scopedService = _serviceProvider.GetRequiredService<IScopedService>();
+        _transientService = _serviceProvider.GetRequiredService<ITransientService>();
+
+        SetNewGuids();
     }
 
+    private void RefreshGuids()   // kaldes af knappen
+    {
+        SetNewGuids();
+        test = "Clicked";
+    }
+
+    private void SetNewGuids()
+    {
+        _guidTransient = _transientService.GetGuid().ToString();
+        _guidScoped = _scopedService.GetGuid().ToString();
+        _guidSingleton = _singletonService.GetGuid().ToString();
+    }
 }
