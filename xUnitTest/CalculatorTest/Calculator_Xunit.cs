@@ -26,6 +26,21 @@ namespace xUnitTest.CalculatorTest
 			Assert.Equal(expected, calculator.Accumulator);
 		}
 
+		[Theory]
+		[InlineData(Double.MaxValue, Double.MaxValue)]
+		[InlineData(Double.MinValue, Double.MinValue)]
+		[InlineData(Double.PositiveInfinity, 100)]
+		[InlineData(Double.NegativeInfinity, -100)]
+		public void Add_Check_For_Infinite_Should_Throw_Exception(double number1, double number2)
+		{
+			// Arrange
+			Calculator calculator = new Calculator();
+
+			// Act + Assert
+			Assert.Throws<ArgumentException>(
+				() => calculator.Add(number1, number2));
+		}
+
 		[Fact]
 		public void Clear_Should_Expect_True()
 		{
@@ -60,6 +75,21 @@ namespace xUnitTest.CalculatorTest
 		}
 
 		[Theory]
+		[InlineData(Double.MinValue, Double.MaxValue)]
+		[InlineData(Double.MaxValue, Double.MinValue)]
+		[InlineData(Double.PositiveInfinity, -100)]
+		[InlineData(Double.NegativeInfinity, 100)]
+		public void Subtract_Check_For_Infinite_Should_Throw_Exception(double number1, double number2)
+		{
+			// Arrange
+			Calculator calculator = new Calculator();
+
+			// Act + Assert
+			Assert.Throws<ArgumentException>(
+				() => calculator.Subtract(number1, number2));
+		}
+
+		[Theory]
 		[InlineData(1, 1, 1)]
 		[InlineData(0, 1, 0)]
 		[InlineData(-1, 1, -1)]
@@ -85,6 +115,18 @@ namespace xUnitTest.CalculatorTest
 			Assert.Throws<ArgumentException>(
 				() => calculator.Divide(100, 0));
 		}
+		[Theory]
+		[InlineData(Double.PositiveInfinity, 1)]
+		[InlineData(Double.NegativeInfinity, 1)]
+		public void Divide_Check_For_Infinite_Should_Throw_Exception(double number1, double number2)
+		{
+			// Arrange
+			Calculator calculator = new Calculator();
+
+			// Act + Assert
+			Assert.Throws<ArgumentException>(
+				() => calculator.Divide(number1, number2));
+		}
 
 		[Theory]
 		[InlineData(1, 1, 1)]
@@ -106,6 +148,21 @@ namespace xUnitTest.CalculatorTest
 		}
 
 		[Theory]
+		[InlineData(Double.MaxValue, Double.MinValue)]
+		[InlineData(Double.MinValue, Double.MaxValue)]
+		[InlineData(Double.PositiveInfinity, 2)]
+		[InlineData(Double.NegativeInfinity, 2)]
+		public void Multiply_Check_For_Infinite_Should_Throw_Exception(double number1, double number2)
+		{
+			// Arrange
+			Calculator calculator = new Calculator();
+
+			// Act + Assert
+			Assert.Throws<ArgumentException>(
+				() => calculator.Multiply(number1, number2));
+		}
+
+		[Theory]
 		[InlineData(1, 1, 1)]
 		[InlineData(0, 0, 1)]
 		[InlineData(100, 0, 1)]
@@ -124,6 +181,21 @@ namespace xUnitTest.CalculatorTest
 
 			// Assert
 			Assert.Equal(expected, calculator.Accumulator);
+		}
+
+		[Theory]
+		[InlineData(Double.MaxValue, 2)]
+		[InlineData(Double.MinValue, 2)]
+		[InlineData(Double.PositiveInfinity, 2)]
+		[InlineData(Double.NegativeInfinity, 2)]
+		public void Exp_Check_For_Infinite_Should_Throw_Exception(double number1, double number2)
+		{
+			// Arrange
+			Calculator calculator = new Calculator();
+
+			// Act + Assert
+			Assert.Throws<ArgumentException>(
+				() => calculator.Exp(number1, number2));
 		}
 
 		[Theory]
@@ -150,6 +222,21 @@ namespace xUnitTest.CalculatorTest
 			// Act + Assert
 			Assert.Throws<ArgumentException>(
 				() => calculator.fac(-100));
+		}
+
+		[Theory]
+		[InlineData(Double.MaxValue)]
+		[InlineData(Double.MinValue)]
+		[InlineData(Double.PositiveInfinity)]
+		[InlineData(Double.NegativeInfinity)]
+		public void Fac_Check_For_Infinite_Should_Throw_Exception(double number1)
+		{
+			// Arrange
+			Calculator calculator = new Calculator();
+
+			// Act + Assert
+			Assert.Throws<ArgumentException>(
+				() => calculator.fac(number1));
 		}
 	}
 }

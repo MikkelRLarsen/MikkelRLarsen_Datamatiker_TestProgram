@@ -21,12 +21,20 @@ namespace xUnitTest.CalculatorTest
 		public double Add(double a, double b)
 		{
 			Accumulator = a + b;
-			return a + b;
+			if (Double.IsInfinity(Accumulator) || Double.IsNaN(Accumulator))
+			{
+				throw new ArgumentException("Accumulator is infinite or not a number");
+			}
+			return Accumulator;
 		}
 
 		public double Subtract(double a, double b)
 		{
 			Accumulator = a - b;
+			if (Double.IsInfinity(Accumulator) || Double.IsNaN(Accumulator))
+			{
+				throw new ArgumentException("Accumulator is infinite or not a number");
+			}
 			return Accumulator;
 		}
 		public double Divide(double a, double b)
@@ -37,30 +45,52 @@ namespace xUnitTest.CalculatorTest
 			}
 			Accumulator = a / b;
 
+			if (Double.IsInfinity(Accumulator) || Double.IsNaN(Accumulator))
+			{
+				throw new ArgumentException("Accumulator is infinite or not a number");
+			}
+
 			return Accumulator;
 		}
 		public double Multiply(double a, double b)
 		{
 			Accumulator = a * b;
+
+			if (Double.IsInfinity(Accumulator) || Double.IsNaN(Accumulator))
+			{
+				throw new ArgumentException("Accumulator is infinite or not a number");
+			}
+
 			return Accumulator;
 		}
 		public double Exp(double a, double b)
 		{
 			Accumulator = Math.Pow(a, b);
+
+			if (Double.IsInfinity(Accumulator) || Double.IsNaN(Accumulator))
+			{
+				throw new ArgumentException("Accumulator is infinite or not a number");
+			}
+
 			return Accumulator;
 		}
 		public double fac(double a)
 		{
 			if (a < 0)
 			{
-				throw new ArgumentException("You may not fac wtih negativ numbers");
+				throw new ArgumentException("You cannot fac wtih negativ numbers");
 			}
 			Accumulator = a;
 
 			for (double i = a-1; i > 1; i--)
 			{
+				if (Double.IsInfinity(Accumulator) || Double.IsNaN(Accumulator))
+				{
+					throw new ArgumentException("Accumulator is infinite or not a number");
+				}
 				Accumulator *= i;
 			}
+
 
 			return Accumulator;
 		}
