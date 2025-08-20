@@ -23,7 +23,7 @@ namespace xUnitTest.CalculatorTest
 			calculator.Add(number1, number2);
 
 			// Assert
-			Assert.Equal(calculator.Accumulator, expected);
+			Assert.Equal(expected, calculator.Accumulator);
 		}
 
 		[Fact]
@@ -45,8 +45,8 @@ namespace xUnitTest.CalculatorTest
 		[InlineData(0, 0, 0)]
 		[InlineData(100, 0, 100)]
 		[InlineData(0, 1, -1)]
-		[InlineData(-1, 1, 0)]
-		[InlineData(-1, -1, 2)]
+		[InlineData(-1, 1, -2)]
+		[InlineData(-1, -1, 0)]
 		public void Subtract(double number1, double number2, double expected)
 		{
 			// Arrange
@@ -56,13 +56,11 @@ namespace xUnitTest.CalculatorTest
 			calculator.Subtract(number1, number2);
 
 			// Assert
-			Assert.Equal(calculator.Accumulator, expected);
+			Assert.Equal(expected, calculator.Accumulator);
 		}
 
 		[Theory]
 		[InlineData(1, 1, 1)]
-		[InlineData(0, 0, 0)]
-		[InlineData(100, 0, 0)]
 		[InlineData(0, 1, 0)]
 		[InlineData(-1, 1, -1)]
 		[InlineData(-1, -1, 1)]
@@ -75,10 +73,19 @@ namespace xUnitTest.CalculatorTest
 			calculator.Divide(number1, number2);
 
 			// Assert
-			Assert.Equal(calculator.Accumulator, expected);
+			Assert.Equal(expected, calculator.Accumulator);
+		}
+		[Fact]
+		public void Divide_With_Zero()
+		{
+			// Arrange 
+			Calculator calculator = new Calculator();
+
+			// Act + Assert
+			Assert.Throws<ArgumentException>(
+				() => calculator.Divide(100, 0));
 		}
 
-		// Multiply, Exp, Fac
 		[Theory]
 		[InlineData(1, 1, 1)]
 		[InlineData(0, 0, 0)]
@@ -92,10 +99,57 @@ namespace xUnitTest.CalculatorTest
 			Calculator calculator = new Calculator();
 
 			// Act
-			calculator.Divide(number1, number2);
+			calculator.Multiply(number1, number2);
 
 			// Assert
-			Assert.Equal(calculator.Accumulator, expected);
+			Assert.Equal(expected, calculator.Accumulator);
+		}
+
+		[Theory]
+		[InlineData(1, 1, 1)]
+		[InlineData(0, 0, 1)]
+		[InlineData(100, 0, 1)]
+		[InlineData(0, 1, 0)]
+		[InlineData(-1, 2, 1)]
+		[InlineData(-1, 3, -1)]
+		[InlineData(-2, -2, 0.25)]
+		[InlineData(2, -2, 0.25)]
+		public void Exp(double number1, double number2, double expected)
+		{
+			// Arrange
+			Calculator calculator = new Calculator();
+
+			// Act
+			calculator.Exp(number1, number2);
+
+			// Assert
+			Assert.Equal(expected, calculator.Accumulator);
+		}
+
+		[Theory]
+		[InlineData(1, 1)]
+		[InlineData(0, 0)]
+		[InlineData(5, 120)]
+		public void Fac(double number1, double expected)
+		{
+			// Arrange
+			Calculator calculator = new Calculator();
+
+			// Act
+			calculator.fac(number1);
+
+			// Assert
+			Assert.Equal(expected, calculator.Accumulator);
+		}
+		[Fact]
+		public void Fac_With_Zero()
+		{
+			// Arrange 
+			Calculator calculator = new Calculator();
+
+			// Act + Assert
+			Assert.Throws<ArgumentException>(
+				() => calculator.fac(-100));
 		}
 	}
 }

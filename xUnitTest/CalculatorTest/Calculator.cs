@@ -33,12 +33,10 @@ namespace xUnitTest.CalculatorTest
 		{
 			if (b == 0)
 			{
-				Accumulator = 0;
+				throw new ArgumentException("You cannot divide with 0");
 			}
-			else
-			{
-				Accumulator = a / b;
-			}
+			Accumulator = a / b;
+
 			return Accumulator;
 		}
 		public double Multiply(double a, double b)
@@ -53,6 +51,10 @@ namespace xUnitTest.CalculatorTest
 		}
 		public double fac(double a)
 		{
+			if (a < 0)
+			{
+				throw new ArgumentException("You may not fac wtih negativ numbers");
+			}
 			Accumulator = a;
 
 			for (double i = a-1; i > 1; i--)
