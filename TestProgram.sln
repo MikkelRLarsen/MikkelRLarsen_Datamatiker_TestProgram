@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsTest", "WinFormsTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp2", "BlazorApp2\BlazorApp2.csproj", "{11131783-1588-4164-A2C0-2978BCDC755C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitTest", "xUnitTest\xUnitTest.csproj", "{58D73F2E-2543-4992-898C-6C227D319E4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{11131783-1588-4164-A2C0-2978BCDC755C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11131783-1588-4164-A2C0-2978BCDC755C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11131783-1588-4164-A2C0-2978BCDC755C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D73F2E-2543-4992-898C-6C227D319E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D73F2E-2543-4992-898C-6C227D319E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D73F2E-2543-4992-898C-6C227D319E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D73F2E-2543-4992-898C-6C227D319E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

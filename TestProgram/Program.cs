@@ -5,6 +5,7 @@ using TestProgram.DesignPatterns.CompositeDesignPattern;
 using TestProgram.Graph.Adjacency_Matrix;
 using TestProgram.LinkedLister;
 using TestProgram.Threads;
+using xUnitTest.CalculatorTest;
 
 namespace TestProgram
 {
@@ -20,7 +21,8 @@ namespace TestProgram
             //Console.WriteLine(GetConnectionString());
 
             //HtmlAgilityPack.AgilityPackMain.newMain();
-            Threads.ThreadMain.newMain();
+
+            //Threads.ThreadMain.newMain();
         }
 
 		protected static string GetConnectionString()
