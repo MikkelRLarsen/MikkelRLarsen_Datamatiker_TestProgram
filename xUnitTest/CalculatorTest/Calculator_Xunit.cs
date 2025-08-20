@@ -14,7 +14,7 @@ namespace xUnitTest.CalculatorTest
 		[InlineData(0, 1, 1)]
 		[InlineData(-1, 1, 0)]
 		[InlineData(-1, -1, -2)]
-		public void Add(double number1, double number2, double expected)
+		public void Add_Should_Expect_True(double number1, double number2, double expected)
 		{
 			// Arrange
 			Calculator calculator = new Calculator();
@@ -27,7 +27,7 @@ namespace xUnitTest.CalculatorTest
 		}
 
 		[Fact]
-		public void Clear()
+		public void Clear_Should_Expect_True()
 		{
 			// Arrange
 			Calculator calculator = new Calculator();
@@ -47,7 +47,7 @@ namespace xUnitTest.CalculatorTest
 		[InlineData(0, 1, -1)]
 		[InlineData(-1, 1, -2)]
 		[InlineData(-1, -1, 0)]
-		public void Subtract(double number1, double number2, double expected)
+		public void Subtract_Should_Expect_True(double number1, double number2, double expected)
 		{
 			// Arrange
 			Calculator calculator = new Calculator();
@@ -64,7 +64,7 @@ namespace xUnitTest.CalculatorTest
 		[InlineData(0, 1, 0)]
 		[InlineData(-1, 1, -1)]
 		[InlineData(-1, -1, 1)]
-		public void Divide(double number1, double number2, double expected)
+		public void Divide_Should_Expect_True(double number1, double number2, double expected)
 		{
 			// Arrange
 			Calculator calculator = new Calculator();
@@ -76,7 +76,7 @@ namespace xUnitTest.CalculatorTest
 			Assert.Equal(expected, calculator.Accumulator);
 		}
 		[Fact]
-		public void Divide_With_Zero()
+		public void Divide_With_Zero_Should_Throw_Exception()
 		{
 			// Arrange 
 			Calculator calculator = new Calculator();
@@ -93,7 +93,7 @@ namespace xUnitTest.CalculatorTest
 		[InlineData(0, 1, 0)]
 		[InlineData(-1, 1, -1)]
 		[InlineData(-1, -1, 1)]
-		public void Multiply(double number1, double number2, double expected)
+		public void Multiply_Should_Expect_True(double number1, double number2, double expected)
 		{
 			// Arrange
 			Calculator calculator = new Calculator();
@@ -114,7 +114,7 @@ namespace xUnitTest.CalculatorTest
 		[InlineData(-1, 3, -1)]
 		[InlineData(-2, -2, 0.25)]
 		[InlineData(2, -2, 0.25)]
-		public void Exp(double number1, double number2, double expected)
+		public void Exp_Should_Expect_True(double number1, double number2, double expected)
 		{
 			// Arrange
 			Calculator calculator = new Calculator();
@@ -130,7 +130,7 @@ namespace xUnitTest.CalculatorTest
 		[InlineData(1, 1)]
 		[InlineData(0, 0)]
 		[InlineData(5, 120)]
-		public void Fac(double number1, double expected)
+		public void Fac_Should_Expect_True(double number1, double expected)
 		{
 			// Arrange
 			Calculator calculator = new Calculator();
@@ -142,7 +142,7 @@ namespace xUnitTest.CalculatorTest
 			Assert.Equal(expected, calculator.Accumulator);
 		}
 		[Fact]
-		public void Fac_With_Zero()
+		public void Fac_With_Zero_Should_Throw_Exception()
 		{
 			// Arrange 
 			Calculator calculator = new Calculator();
