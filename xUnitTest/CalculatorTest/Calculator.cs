@@ -80,6 +80,7 @@ namespace xUnitTest.CalculatorTest
 			{
 				throw new ArgumentException("You cannot fac wtih negativ numbers");
 			}
+
 			Accumulator = a;
 
 			for (double i = a-1; i > 1; i--)

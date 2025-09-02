@@ -42,7 +42,6 @@ namespace TestProgram.SOLID.SOLID_Opgaver
 				}
 
 				public void GenerateReport()
-
 				{
 					Console.WriteLine("Generating Report...");
 				}
