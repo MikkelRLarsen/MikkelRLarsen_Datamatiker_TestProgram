@@ -15,9 +15,10 @@ namespace xUnitTest.MoqOpgaver.Opgave_5.TestClasses
 			_paymentService = paymentService;
 		}
 
-		public string TrackPayment(int paymentId)
+		public virtual string TrackPayment(int paymentId)
 		{
 			return _paymentService.GetPaymentStatus(paymentId);
 		}
 	}
+
 }
