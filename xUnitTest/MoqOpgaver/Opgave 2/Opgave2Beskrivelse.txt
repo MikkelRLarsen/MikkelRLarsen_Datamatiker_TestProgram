@@ -1,0 +1,18 @@
+﻿Opgave 2: Moq og Xunit.
+
+1) Tilføj et xunit projekt til dette projekt.
+
+2) Lav unit tests filer i dette projekt (lav 3 forskellige, da vi jo tester 3 forskellige ting 
+(calculator, logger, repository – læg ikke det hele i samme fil).
+
+3) I hver fil skal du så lave nogle tests, hvor du bruger moq 
+(lav de eksempler i Program.cs om til rigtige tests med XUnit og brug moq inde i de tests) 
+og måske tilføj et par flere relevante tests også). Husk brug af arrange, act, assert pattern.
+
+4) Lav også tests, hvor du tester at noget er kaldt det rigtige antal gange (lav det som en separat test) ved brug af verify.
+
+Hints:
+Så noget i stil med : mockCalculator.Verify….
+
+Læg mærke til at vi nu kan f.eks. mocke en database eller faktisk en api service eller hvad vi nu har lyst til, 
+uden at skulle kalde den rigtige implementation (som måske kan være tricky af forskellige grunde). Faktisk kan vi mocke alt.

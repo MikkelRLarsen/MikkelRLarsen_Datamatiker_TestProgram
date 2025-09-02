@@ -12,10 +12,10 @@ namespace xUnitTest.MoqOpgaver.Opgave_5.TestClasses
 			: base(paymentService)
 		{
 		}
-		// "Pending", "Processing", "Completed"
 
 		public override string TrackPayment(int paymentId)
 		{
+			// base.TrackPayment can only return "Pending", "Processing" or "Completed"
 			return base.TrackPayment(paymentId) == "Completed" ? "Completed" : "Not Completed Yet";
 		}
 	}

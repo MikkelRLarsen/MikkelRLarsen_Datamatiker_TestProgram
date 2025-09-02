@@ -1,0 +1,24 @@
+﻿Opgave 6 – Inversion of control / DI:
+
+Se på følgende kode.
+
+Refaktorere koden sådan at vi kan bruge DI princippet
+
+public class EmailSender
+{
+	public void Send(string message)
+	{
+		Console.WriteLine($"Email sent: {message}");
+	}
+}
+
+
+public class NotificationService
+{
+	private readonly EmailSender _emailSender = new EmailSender();
+
+	public void Notify(string message)
+	{
+		_emailSender.Send(message);
+	}
+}

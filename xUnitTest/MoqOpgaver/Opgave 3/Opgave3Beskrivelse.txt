@@ -1,0 +1,44 @@
+﻿Opgave 3 – mere moq - exceptions:
+
+Opsætning:
+En bank service tjekker account saldo. Hvis saldoen er for lav, så bliver en exception kastet.
+
+public interface IBankService
+{
+decimal GetBalance(int accountId);
+}
+
+public class AccountManager
+{
+	private readonly IBankService _bankService;
+
+	//bemærk, constructor injection – så DI princip bruges her.
+	public AccountManager(IBankService bankService)
+	{
+	_bankService = bankService;
+	}
+
+	public bool CanWithdraw(int accountId, decimal amount)
+	{
+		var balance = _bankService.GetBalance(accountId);
+
+		if (balance < amount)
+		throw new InvalidOperationException("Insufficient funds");
+
+		return true;
+	}
+}
+
+
+Lav minimum to unit tests med xunit, hvor du bruger moq.
+
+1) En test skal simulere at vi godt kan trække penge ud (altså at der er penge nok på kontoen i forhold til det vi hæver. 
+2) En anden test skal teste at vores exception bliver kaldt.
+
+
+Hints:
+Bemærk at vi skal bruge selve implementationen af AccountManager, 
+men det vi skal mocke vil være vores bankservice, som vi så kan give til AccountManager på denne måde:
+
+var manager = new AccountManager(mockBankService.Object);
+Så vi skal ikke mocke account mananger, men kun den service, som account manager bruger.

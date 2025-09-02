@@ -1,0 +1,36 @@
+﻿Opgave 4 : callbacks
+
+Opsætning:
+En bruger services håndterer actions og logger dem.
+Du skal mocke loggeren og veriify at den logger beskeder, når brugeren laver en action. Derudover skal Callback bruges til at tjekke de faktiske logged messages.
+
+public interface ILogger
+{
+	void Log(string message);
+}
+
+public class UserService
+{
+	private readonly ILogger _logger;
+
+	public UserService(ILogger logger)
+	{
+		_logger = logger;
+	}
+
+	public void PerformAction(string username, string action)
+	{
+		_logger.Log($"{username} performed {action}");
+	}
+}
+
+
+Hints:
+Igen skal vi kun mocke vores Logger, ikke UserService.
+Vi er også nødt til at gemme beskederne, for bagefter at teste om de findes i vores list.
+Så vi skal have noget i stil med dette.
+var mockLogger = new Mock<ILogger>();
+var loggedMessages = new List<string>();
+loggedMessages skal jo så bruges i vores CallBack…som skal tilføje til listen.….
+
+Prøv så at lave nogle (f.eks. 2) userService.PerformAction(….) og så tjekke bagefter at de rigtige strings bliver gemt i listen.

@@ -1,0 +1,22 @@
+﻿Opgave 5:
+
+Opsætning:
+Et betalingsystem, PaymentProcessor, bruger en external service til at tjekke betalings status. Betalingsservicen returnerer følgende:
+
+"Pending" på det første kald
+"Processing" på andet kald
+"Completed" på 3. kald
+
+1) Implementer PaymentProcessor – den skal kunne tage dette interface i constructoren.
+
+public interface IPaymentService
+{
+	string GetPaymentStatus(int paymentId);
+}
+
+2) Og PaymentProcessor skal kunne supportere denne metode :
+
+public string TrackPayment(int paymentId)
+
+Hints:
+Du skal så bruge moq til at lave en xunit test til at verificere at den virker i forhold til specifikationen. Brug SetupSequence I Moq (se dokumentation)
