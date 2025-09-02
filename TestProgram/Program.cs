@@ -5,6 +5,7 @@ using TestProgram.DesignPatterns.CompositeDesignPattern;
 using TestProgram.Graph.Adjacency_Matrix;
 using TestProgram.LinkedLister;
 using TestProgram.Threads;
+using xUnitTest.CalculatorTest;
 
 namespace TestProgram
 {
