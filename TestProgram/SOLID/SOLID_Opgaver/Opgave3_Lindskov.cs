@@ -42,6 +42,7 @@ namespace TestProgram.SOLID.SOLID_Opgaver
 			{
 				public double Weight { get; set; }
 			}
+
 			private interface IFly
 			{
 				void Fly();
