@@ -19,8 +19,8 @@ namespace TestProgram
 
             //Console.WriteLine(GetConnectionString());
 
-            //HtmlAgilityPack.AgilityPackMain.newMain();
-            Threads.ThreadMain.newMain();
+            HtmlAgilityPack.AgilityPackMain.newMain();
+            //Threads.ThreadMain.newMain();
         }
 
 		protected static string GetConnectionString()

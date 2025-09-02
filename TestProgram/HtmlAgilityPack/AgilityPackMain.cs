@@ -11,7 +11,7 @@ namespace TestProgram.HtmlAgilityPack
 	{
 		public static void newMain()
 		{
-			Setup();
+			Valdemarsro().GetAwaiter().GetResult();
 		}
 
 		static async Task<string> FindRecipeImageUrl(string pageUrl)
@@ -82,6 +82,113 @@ namespace TestProgram.HtmlAgilityPack
 			{
 				Console.WriteLine($"Fejl i Setup: {ex.Message}");
 			}
+		}
+
+		public static async Task Valdemarsro()
+		{
+			var url = "https://www.valdemarsro.dk/carbonara_opskrift/";
+			var httpClient = new HttpClient();
+			var html = await httpClient.GetStringAsync(url);
+
+			var doc = new HtmlDocument();
+			doc.LoadHtml(html);
+
+			// Titel
+			var titleNode = doc.DocumentNode.SelectSingleNode("//h1");
+			string title = titleNode?.InnerText.Trim() ?? "Ingen titel fundet";
+
+			// Ingredienser kategorier
+			var ingredientList = doc.DocumentNode.SelectSingleNode("//ul[@class='ingredientlist content']");
+			List<string> ingredients = new List<string>();
+			List<string> accessories = new List<string>();
+			List<string> serving = new List<string>();
+
+			string currentCategory = "main";
+
+			if (ingredientList != null)
+			{
+				foreach (var li in ingredientList.SelectNodes("./li"))
+				{
+					if (li.HasClass("ingredient-header"))
+					{
+						var headerText = li.InnerText.Trim().ToLower();
+
+						if (headerText.Contains("tilbehør"))
+							currentCategory = "accessory";
+						else if (headerText.Contains("til servering"))
+							currentCategory = "serving";
+						else
+							currentCategory = "main";
+
+						continue;
+					}
+
+					var text = li.InnerText.Trim();
+					if (string.IsNullOrWhiteSpace(text)) continue;
+
+					switch (currentCategory)
+					{
+						case "accessory":
+							accessories.Add(text);
+							break;
+						case "serving":
+							serving.Add(text);
+							break;
+						default:
+							ingredients.Add(text);
+							break;
+					}
+				}
+			}
+
+			// Fremgangsmåde
+			var instructionContainer = doc.DocumentNode.SelectSingleNode("//div[@itemprop='recipeInstructions']");
+			List<string> steps = new List<string>();
+
+			if (instructionContainer != null)
+			{
+				foreach (var p in instructionContainer.SelectNodes(".//p"))
+				{
+					var text = p.InnerText.Trim();
+					if (!string.IsNullOrWhiteSpace(text))
+					{
+						steps.Add(text);
+					}
+				}
+			}
+
+			// Billede
+			var imageNode = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'recipe-image')]//img[1]");
+			string imageUrl = imageNode?.GetAttributeValue("src", "") ?? "Billede ikke fundet";
+
+			// Udskrivning
+			Console.WriteLine("Titel: " + title);
+
+			Console.WriteLine("\nIngredienser:");
+			foreach (var ing in ingredients)
+			{
+				Console.WriteLine("- " + ing);
+			}
+
+			Console.WriteLine("\nTilbehør:");
+			foreach (var acc in accessories)
+			{
+				Console.WriteLine("- " + acc);
+			}
+
+			Console.WriteLine("\nTil servering:");
+			foreach (var serv in serving)
+			{
+				Console.WriteLine("- " + serv);
+			}
+
+			Console.WriteLine("\nFremgangsmåde:");
+			for (int i = 0; i < steps.Count; i++)
+			{
+				Console.WriteLine($"{i + 1}. {steps[i]}");
+			}
+
+			Console.WriteLine("\nBillede-URL:\n" + imageUrl);
 		}
 
 	}
