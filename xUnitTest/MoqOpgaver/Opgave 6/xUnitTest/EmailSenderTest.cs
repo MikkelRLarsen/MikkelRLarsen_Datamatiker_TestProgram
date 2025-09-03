@@ -55,7 +55,7 @@ namespace xUnitTest.MoqOpgaver.Opgave_6.xUnitTest
 			}
 
 			// Assert
-			displayMock.Verify(display => display.DisplayMessage(It.IsAny<string>()), Times.Exactly(2));
+			displayMock.Verify(display => display.DisplayMessage(It.IsAny<string>()), Times.Exactly(expectedMessage.Length));
 
 			for (int i = 0; i < expectedMessage.Length; i++)
 			{
