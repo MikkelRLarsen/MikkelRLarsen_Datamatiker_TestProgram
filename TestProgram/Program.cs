@@ -1,9 +1,7 @@
-﻿
-
-using TestProgram.BinarySeachTree;
-using TestProgram.DesignPatterns.CompositeDesignPattern;
+﻿using TestProgram.DesignPatterns.CompositeDesignPattern;
 using TestProgram.Graph.Adjacency_Matrix;
 using TestProgram.LinkedLister;
+using TestProgram.SearchTrees.TournamentTree;
 using TestProgram.Threads;
 using xUnitTest.CalculatorTest;
 
@@ -20,8 +18,9 @@ namespace TestProgram
 
             //Console.WriteLine(GetConnectionString());
 
-            HtmlAgilityPack.AgilityPackMain.newMain();
+            //HtmlAgilityPack.AgilityPackMain.newMain();
             //Threads.ThreadMain.newMain();
+            TournamentTreeMain.TournamentTreeMainMethod();
         }
 
 		protected static string GetConnectionString()

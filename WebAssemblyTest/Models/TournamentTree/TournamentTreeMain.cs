@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WebAssemblyTest.Models.TournamentTree
+{
+	public class TournamentTreeMain
+	{
+		public static void TournamentTreeMainMethod()
+		{
+			List<string> tournamentPartisipants = new List<string>();
+
+			for (int i = 1; i <= 12; i++)
+			{
+				tournamentPartisipants.Add(i.ToString());
+			}
+
+			Tournament tournament = new Tournament(tournamentPartisipants);
+			tournament.PrintAllLeaves();
+
+			Console.WriteLine();
+
+			tournament.InOrderTravel();
+		}
+	}
+}

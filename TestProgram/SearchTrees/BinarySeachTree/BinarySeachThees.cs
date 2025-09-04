@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestProgram.BinarySeachTree
+namespace TestProgram.SearchTrees.BinarySeachTree
 {
     internal class BinarySeachThees
     {
@@ -116,8 +116,8 @@ namespace TestProgram.BinarySeachTree
         public int count;
         public Node(int v)
         {
-            this.data = v;
-            this.left = this.right = null;
+            data = v;
+            left = right = null;
             count = 1;
         }
 

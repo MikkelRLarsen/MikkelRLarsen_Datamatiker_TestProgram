@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestProgram.BinarySeachTree
+namespace TestProgram.SearchTrees.BinarySeachTree
 {
     internal class BinarySeachTreeMain
     {
