@@ -12,17 +12,14 @@ namespace TestProgram.SearchTrees.TournamentTree
 		{
 			List<string> tournamentPartisipants = new List<string>();
 
-			for (int i = 1; i <= 12; i++)
+			for (int i = 1; i <= 8; i++)
 			{
 				tournamentPartisipants.Add(i.ToString());
 			}
 
 			Tournament tournament = new Tournament(tournamentPartisipants);
+			tournament.PrintTree();
 			tournament.PrintAllLeaves();
-
-			Console.WriteLine();
-
-			tournament.InOrderTravel();
 		}
 	}
 }

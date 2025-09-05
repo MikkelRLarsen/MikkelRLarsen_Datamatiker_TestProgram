@@ -54,12 +54,12 @@ namespace TestProgram.SearchTrees.BinarySeachTree
         {
             if (node != null)
             {
+                PrintAllLeavesHelper(node.left);
+                PrintAllLeavesHelper(node.right);
                 if (node.left == null && node.right == null)
                 {
                     Console.Write($"{node.data} ");
                 }
-                PrintAllLeavesHelper(node.left);
-                PrintAllLeavesHelper(node.right);
             }
         }
 

@@ -19,8 +19,8 @@ namespace TestProgram.SearchTrees.BinarySeachTree
             test1.InsertNode(150);
             test1.InsertNode(300);
             //test1.InOrderTravel();
-
-            Console.WriteLine(test1.FindBiggest().data);
+            test1.PrintAllLeaves();
+            //Console.WriteLine(test1.FindBiggest().data);
             //Console.WriteLine(test1.FindSum());
             //test1.PrintAllLeaves();
         }

@@ -9,17 +9,21 @@ namespace TestProgram.SearchTrees.TournamentTree
 {
 	public class Tournament
 	{
-		private Match? _finalMatch = null;
+		public Match? _finalMatch = null;
+		private int matchNumber = 1;
 
 		public Tournament(IList<string> partisipants)
 		{
 			_finalMatch = CreateNewMatch(partisipants, null);
+
+			TournamentQueManager que = new TournamentQueManager(_finalMatch);
 		}
 
 		private Match CreateNewMatch(IList<string> partisipants, Match? nextMatch)
 		{
 			Match newMatch = new Match();
 			newMatch.NextMatch = nextMatch;
+			newMatch.MatchCount = matchNumber++;
 
 			if (partisipants.Count == 2)
 			{
@@ -75,6 +79,47 @@ namespace TestProgram.SearchTrees.TournamentTree
 				}
 				PrintAllLeavesHelper(match.LeftMatch);
 				PrintAllLeavesHelper(match.RightMatch);
+			}
+		}
+
+		public void PrintTree()
+		{
+			Console.OutputEncoding = System.Text.Encoding.UTF8;
+			PrintTreeHelper(_finalMatch, "", true);
+		}
+
+		private void PrintTreeHelper(Match? match, string indent, bool last)
+		{
+			if (match == null) return;
+
+			string label;
+
+			// Case 1: Begge deltagere er sat direkte
+			if (match.LeftPartisipant != null || match.RightPartisipant != null)
+			{
+				label = $"{(match.LeftPartisipant ?? "??")} vs {(match.RightPartisipant ?? "??")}";
+			}
+			else
+			{
+				// Case 2: Ikke direkte deltagere, men kamp via børn
+				label = "Match";
+			}
+
+			// Tegn gren
+			Console.Write(indent);
+			Console.Write(last ? "└─→ " : "├─→ ");
+			Console.WriteLine(label);
+
+			// Nyt indryk til børn
+			indent += last ? "    " : "│   ";
+
+			var children = new List<Match?>();
+			if (match.LeftMatch != null) children.Add(match.LeftMatch);
+			if (match.RightMatch != null) children.Add(match.RightMatch);
+
+			for (int i = 0; i < children.Count; i++)
+			{
+				PrintTreeHelper(children[i], indent, i == children.Count - 1);
 			}
 		}
 	}

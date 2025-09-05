@@ -1,6 +1,7 @@
 ﻿using TestProgram.DesignPatterns.CompositeDesignPattern;
 using TestProgram.Graph.Adjacency_Matrix;
 using TestProgram.LinkedLister;
+using TestProgram.SearchTrees.BinarySeachTree;
 using TestProgram.SearchTrees.TournamentTree;
 using TestProgram.Threads;
 using xUnitTest.CalculatorTest;
@@ -11,8 +12,8 @@ namespace TestProgram
     {
         static void Main(string[] args)
         {
-            //LinkedListerMain.LinkedLister();
-            //BinarySeachTreeMain.BinarySearchTreeMain();
+			//LinkedListerMain.LinkedLister();
+			//BinarySeachTreeMain.BinarySearchTreeMain();
             //GraphMatrix_Main.GraphMatrixMain();
             //CompositeDesignPatternMain.newMain();
 

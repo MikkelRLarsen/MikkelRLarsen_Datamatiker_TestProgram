@@ -27,10 +27,11 @@
                           stroke="@(IsSelected(info.Match) ? SelectedStroke : PlayerStroke)"
                           style="cursor:pointer"
                           @onclick="() => OnPlayerClick(info.Match, true)" />
-                        <!--
-
-                    <text x="@(info.BoxLeftX + BoxW/2)" y="@(@info.LeftY + BoxH*0.66)" text-anchor="middle" font-size="13" font-weight="600">@info.Match.LeftPartisipant</text>
-                        -->
+                        
+                    <g>
+                        <text x="@(info.BoxLeftX + BoxW/2)" y="@(@info.LeftY + BoxH*0.66)" text-anchor="middle" font-size="13" font-weight="600">@info.Match.LeftPartisipant</text>
+                    </g>
+                       
                 }
                 <!-- Right participant rect -->
                 if (info.HasRightParticipant)
@@ -40,10 +41,11 @@
                           stroke="@(IsSelected(info.Match) ? SelectedStroke : PlayerStroke)"
                           style="cursor:pointer"
                           @onclick="() => OnPlayerClick(info.Match, false)" />
-                          <!--
-
-                    <text x="@(info.BoxLeftX + BoxW/2)" y="@(@info.RightY + BoxH*0.66)" text-anchor="middle" font-size="13" font-weight="600">@info.Match.RightPartisipant</text>
-                          -->
+                          
+                    <g>
+                        <text x="@(info.BoxLeftX + BoxW/2)" y="@(@info.RightY + BoxH*0.66)" text-anchor="middle" font-size="13" font-weight="600">@info.Match.RightPartisipant</text>
+                    </g>
+                          
                 }
 
                 <!-- VS box (center) clickable -->
@@ -54,10 +56,11 @@
                       @onmouseenter="() => SetHover(info.Match, true)"
                       @onmouseleave="() => SetHover(info.Match, false)"
                       @onclick="() => ToggleSelected(info.Match)" />
-                      <!--
-
-                <text x="@(info.VsX + VsW/2)" y="@(info.CenterY + VsH*0.22)" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">VS</text>
-                      -->
+                      
+                <g>
+                    <text x="@(info.VsX + VsW/2)" y="@(info.CenterY + VsH*0.22)" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">VS</text>
+                </g>
+                      
 
                 <!-- Connectors from children -->
                 @if (info.LeftChildInfo != null)
@@ -154,10 +157,6 @@
             int half = (int)Math.Ceiling(partisipants.Count / 2.0);
             newMatch.LeftMatch = CreateNewMatch(partisipants.Take(half).ToList(), newMatch);
             newMatch.RightPartisipant = partisipants[2];
-        }
-        else if (partisipants.Count == 1)
-        {
-            newMatch.LeftPartisipant = partisipants[0];
         }
         else
         {

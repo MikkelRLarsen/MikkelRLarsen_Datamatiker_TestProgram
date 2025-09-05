@@ -13,5 +13,6 @@ namespace TestProgram.SearchTrees.TournamentTree
 		public string? LeftPartisipant { get; set; }
 		public string? RightPartisipant { get; set; }
 		public Match? NextMatch { get; set; } = null;
+		public int? MatchCount { get; set; }
 	}
 }

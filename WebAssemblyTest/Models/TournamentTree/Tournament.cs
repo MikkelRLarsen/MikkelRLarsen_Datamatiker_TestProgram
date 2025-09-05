@@ -76,5 +76,46 @@ namespace WebAssemblyTest.Models.TournamentTree
 				PrintAllLeavesHelper(match.RightMatch);
 			}
 		}
+
+		public void PrintTree()
+		{
+			Console.OutputEncoding = System.Text.Encoding.UTF8;
+			PrintTreeHelper(_finalMatch, "", true);
+		}
+
+		private void PrintTreeHelper(Match? match, string indent, bool last)
+		{
+			if (match == null) return;
+
+			// Lav node-label
+			string label;
+			if (match.LeftMatch == null && match.RightMatch == null)
+			{
+				// Blad med spillere
+				label = $"{(match.LeftPartisipant ?? "??")} vs {(match.RightPartisipant ?? "??")}";
+			}
+			else
+			{
+				// Mellem-/finalekamp
+				label = "Match";
+			}
+
+			// Tegn grene
+			Console.Write(indent);
+			Console.Write(last ? "└─→ " : "├─→ ");
+			Console.WriteLine(label);
+
+			// Nyt indryk til børn
+			indent += last ? "    " : "│   ";
+
+			var children = new List<Match?>();
+			if (match.LeftMatch != null) children.Add(match.LeftMatch);
+			if (match.RightMatch != null) children.Add(match.RightMatch);
+
+			for (int i = 0; i < children.Count; i++)
+			{
+				PrintTreeHelper(children[i], indent, i == children.Count - 1);
+			}
+		}
 	}
 }
