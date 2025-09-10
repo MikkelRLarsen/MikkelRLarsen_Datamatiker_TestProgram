@@ -1,0 +1,9 @@
+﻿@page "/shoppinglist"
+@using ShardLibrary.Models
+
+<h3>ShoppingListPage</h3>
+
+@foreach (ShoppingItem item in _items)
+{
+    <p>@item.Name</p>
+}

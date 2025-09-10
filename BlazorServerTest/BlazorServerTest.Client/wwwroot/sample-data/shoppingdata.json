@@ -1,0 +1,4 @@
+[{"id":1,"name":"Bananer","quantity":5,"haveBought":false},
+{"id":2,"name":"Gulerødder","quantity":10,"haveBought":false},
+{"id":3,"name":"Youghurt","quantity":3,"haveBought":true}
+]
