@@ -12,7 +12,7 @@ namespace TestProgram.SearchTrees.TournamentTree
 		{
 			List<string> tournamentPartisipants = new List<string>();
 
-			for (int i = 1; i <= 8; i++)
+			for (int i = 1; i <= 9; i++)
 			{
 				tournamentPartisipants.Add(i.ToString());
 			}

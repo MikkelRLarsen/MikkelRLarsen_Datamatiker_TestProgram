@@ -23,12 +23,15 @@ namespace APITest
 				app.UseSwaggerUI();
 			}
 
-			app.UseHttpsRedirection();
+			// app.UseHttpsRedirection();
 
 			app.UseAuthorization();
 
 
 			app.MapControllers();
+
+			app.Urls.Clear();
+			app.Urls.Add("http://localhost:8001");
 
 			app.Run();
 		}
