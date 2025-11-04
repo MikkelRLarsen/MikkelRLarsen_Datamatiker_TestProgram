@@ -1,0 +1,66 @@
+﻿@using WebAssemblyTest.Models
+@page "/create-product"
+
+<PageTitle>Create Product</PageTitle>
+
+<h1 class="mb-3 mt-3">Add Product</h1>
+
+<EditForm EditContext="@_editContext" class="row p-3"
+OnValidSubmit="@HandleValidSubmit"
+OnInvalidSubmit="@HandleInvalidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="col-md-12 mb-3">
+        <label for="Name">Name</label>
+        <InputText id="Name" @bind-Value="_product.Name" class="form-control" />
+        <ValidationMessage For="@(() => _product.Name)" />
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="Price">Price</label>
+        <InputNumber id="Price" @bind-Value="_product.Price" class="form-control" />
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="PublishedDate">Published Date</label>
+        <InputDate id="PublishedDate" @bind-Value="_product.PublishedDate" class="form-control" />
+    </div>
+    <div class="col-md-12 mb-3">
+        <label for="Description">Description</label>
+        <InputTextArea id="Description" @bind-Value="_product.Description" class="form-control" />
+    </div>
+    <div class="col-12 mb-3">
+        <label for="Materiale">Materiale</label>
+        <InputSelect class="select-material" @bind-Value="_product.Materiale">
+            @foreach (string material in _materials)
+            {
+                <option value="@material">@material</option>
+            }
+        </InputSelect>
+    </div>
+    <div class="col-12 mb-3">
+        <div class="form-check">
+            <InputCheckbox id="IsPublished" @bind-Value="_product.IsPublished" class="form-check-input" />
+            <label class="form-check-label" for="IsPublished">
+                Published
+            </label>
+        </div>
+    </div>
+    <div class="col-12 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+<div>
+    <ol>
+        @foreach (var product in _productList)
+        {
+            <WebAssemblyTest.SharedChildComponents.ShowProductItem Product=@product/>
+        }
+    </ol>
+    @if (_productList.Count != 0)
+    {        
+        <button type="reset" class="btn btn-primary" onclick="@ClearProducts">Clear</button>
+    }
+</div>
+

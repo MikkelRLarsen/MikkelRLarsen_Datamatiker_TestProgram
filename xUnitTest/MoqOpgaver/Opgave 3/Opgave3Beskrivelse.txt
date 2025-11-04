@@ -5,7 +5,7 @@ En bank service tjekker account saldo. Hvis saldoen er for lav, så bliver en ex
 
 public interface IBankService
 {
-decimal GetBalance(int accountId);
+	decimal GetBalance(int accountId);
 }
 
 public class AccountManager
