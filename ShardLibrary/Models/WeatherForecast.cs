@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShardLibrary
+namespace ShardLibrary.Models
 {
 	public class WeatherForecast
 	{

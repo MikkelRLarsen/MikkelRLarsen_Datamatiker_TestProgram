@@ -20,5 +20,9 @@ namespace ShardLibrary.Models
 			Quantity = quantity;
 			IHaveBought = iHaveBought;
 		}
+
+		public ShoppingItem()
+		{
+		}
 	}
 }

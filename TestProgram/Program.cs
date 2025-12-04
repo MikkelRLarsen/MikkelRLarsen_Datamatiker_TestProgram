@@ -5,6 +5,8 @@ using TestProgram.SearchTrees.BinarySeachTree;
 using TestProgram.SearchTrees.TournamentTree;
 using TestProgram.Threads;
 using xUnitTest.CalculatorTest;
+using TestProgram.PrimeNumbers;
+using TestProgram.Email;
 
 namespace TestProgram
 {
@@ -12,8 +14,8 @@ namespace TestProgram
     {
         static void Main(string[] args)
         {
-			//LinkedListerMain.LinkedLister();
-			//BinarySeachTreeMain.BinarySearchTreeMain();
+            //LinkedListerMain.LinkedLister();
+            //BinarySeachTreeMain.BinarySearchTreeMain();
             //GraphMatrix_Main.GraphMatrixMain();
             //CompositeDesignPatternMain.newMain();
 
@@ -21,8 +23,12 @@ namespace TestProgram
 
             //HtmlAgilityPack.AgilityPackMain.newMain();
             //Threads.ThreadMain.newMain();
-            TournamentTreeMain.TournamentTreeMainMethod();
-        }
+            //TournamentTreeMain.TournamentTreeMainMethod();
+            //PrimeNumbers.PrimeNumbersMain.GeneratePrimenumbers(100);
+            //PrimeNumbers.PrimeNumbersMain.FibonacciNumber(5);
+
+            EmailSender.SendEmail();
+		}
 
 		protected static string GetConnectionString()
 		{

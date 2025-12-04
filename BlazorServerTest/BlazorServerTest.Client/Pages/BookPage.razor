@@ -1,0 +1,9 @@
+﻿@page "/bookPage"
+@using ShardLibrary.Models
+
+<h3>ShoppingListPage</h3>
+
+@foreach (Book item in _items)
+{
+    <p>@item.Isbn</p>
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "Isbn": "978-0140449136",
+    "Title": "The Odyssey",
+    "Description": "An epic poem attributed to Homer, detailing the adventures of Odysseus as he returns home from the Trojan War.",
+    "PublishYear": 800
+  },
+  {
+    "Isbn": "978-0061120084",
+    "Title": "To Kill a Mockingbird",
+    "Description": "A novel by Harper Lee exploring themes of racial injustice and moral growth in the American South.",
+    "PublishYear": 1960
+  },
+  {
+    "Isbn": "978-0307277671",
+    "Title": "The Road",
+    "Description": "A post-apocalyptic novel by Cormac McCarthy that follows a father and son's journey through a devastated landscape.",
+    "PublishYear": 2006
+  },
+  {
+    "Isbn": "978-0553382563",
+    "Title": "A Brief History of Time",
+    "Description": "Stephen Hawking's book explaining cosmology, black holes, and the nature of the universe for a general audience.",
+    "PublishYear": 2025
+  }
+]

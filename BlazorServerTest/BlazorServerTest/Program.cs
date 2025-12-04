@@ -1,6 +1,7 @@
 using BlazorServerTest.Client.Pages;
 using BlazorServerTest.Client.Services;
 using BlazorServerTest.Components;
+using ShardLibrary.Repository;
 
 namespace BlazorServerTest
 {
@@ -17,7 +18,24 @@ namespace BlazorServerTest
 
 			builder.Services.AddControllers();
 
+			builder.Services.AddDbContext<ShoppingDBContext>();
+
+			builder.Services.AddSingleton(new HttpClient
+			{
+				BaseAddress = new Uri("https://localhost:7180/")
+			});
+
+			builder.Services.AddHttpClient<IShoppingItemRepository, ShoppingItemRepository>(client =>
+			{
+				client.BaseAddress = new Uri("https://localhost:7180/");
+			});
+
 			builder.Services.AddHttpClient<IShoppingService, ShoppingService>(client =>
+			{
+				client.BaseAddress = new Uri("https://localhost:7180/");
+			});
+
+			builder.Services.AddHttpClient<IBookService, BookService>(client =>
 			{
 				client.BaseAddress = new Uri("https://localhost:7180/");
 			});
@@ -26,6 +44,7 @@ namespace BlazorServerTest
 			{
 				client.BaseAddress = new Uri("https://localhost:7180/");
 			});
+
 
 			var app = builder.Build();
 
@@ -58,6 +77,7 @@ namespace BlazorServerTest
 				.AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
 
 			app.Run();
+
 		}
 	}
 }

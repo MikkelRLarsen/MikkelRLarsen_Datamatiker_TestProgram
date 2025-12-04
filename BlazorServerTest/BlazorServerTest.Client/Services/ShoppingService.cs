@@ -24,8 +24,8 @@ namespace BlazorServerTest.Client.Services
 
 		public async Task<ShoppingItem[]?> GetAllItems()
 		{
-			var result = await httpClient.GetFromJsonAsync<ShoppingItem[]>("sample-data/shoppingdata.json");
-			return result;
+			var items = await httpClient.GetFromJsonAsync<ShoppingItem[]>("api/shoppingitem");
+			return items;
 		}
 
 		public Task<ShoppingItem?> GetItem(int id)
