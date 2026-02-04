@@ -17,7 +17,7 @@ namespace TestProgram.SearchTrees.TournamentTree
 				tournamentPartisipants.Add(i.ToString());
 			}
 
-			Tournament tournament = new Tournament(tournamentPartisipants);
+			Tournament tournament = new Tournament(tournamentPartisipants.ToArray());
 			tournament.PrintTree();
 			tournament.PrintAllLeaves();
 		}

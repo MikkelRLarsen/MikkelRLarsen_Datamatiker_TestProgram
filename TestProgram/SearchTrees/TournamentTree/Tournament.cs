@@ -12,35 +12,33 @@ namespace TestProgram.SearchTrees.TournamentTree
 		public Match? _finalMatch = null;
 		private int matchNumber = 1;
 
-		public Tournament(IList<string> partisipants)
+		public Tournament(string[] partisipants)
 		{
-			_finalMatch = CreateNewMatch(partisipants, null);
-
-			TournamentQueManager que = new TournamentQueManager(_finalMatch);
+			_finalMatch = CreateNewMatch(partisipants.AsSpan(), null);
 		}
 
-		private Match CreateNewMatch(IList<string> partisipants, Match? nextMatch)
+		private Match CreateNewMatch(Span<string> participants, Match? nextMatch)
 		{
 			Match newMatch = new Match();
 			newMatch.NextMatch = nextMatch;
 			newMatch.MatchCount = matchNumber++;
 
-			if (partisipants.Count == 2)
+			if (participants.Length == 2)
 			{
-				newMatch.LeftPartisipant = partisipants[0];
-				newMatch.RightPartisipant= partisipants[1];
+				newMatch.LeftPartisipant = participants[0];
+				newMatch.RightPartisipant = participants[1];
 			}
-			else if (partisipants.Count == 3)
+			else if (participants.Length == 3)
 			{
-				int half = (int)Math.Ceiling(partisipants.Count / 2.0);
-				newMatch.LeftMatch = CreateNewMatch(partisipants.Take(half).ToList(), newMatch);
-				newMatch.RightPartisipant = partisipants[2];
+				int half = (participants.Length + 1) / 2; // Ceil
+				newMatch.LeftMatch = CreateNewMatch(participants.Slice(0, half), newMatch);
+				newMatch.RightPartisipant = participants[2];
 			}
 			else
 			{
-				int half = (int)Math.Ceiling(partisipants.Count / 2.0);
-				newMatch.LeftMatch = CreateNewMatch(partisipants.Take(half).ToList(), newMatch);
-				newMatch.RightMatch = CreateNewMatch(partisipants.Skip(half).ToList(), newMatch);
+				int half = (participants.Length + 1) / 2; // Ceil
+				newMatch.LeftMatch = CreateNewMatch(participants.Slice(0, half), newMatch);
+				newMatch.RightMatch = CreateNewMatch(participants.Slice(half), newMatch);
 			}
 
 			return newMatch;
