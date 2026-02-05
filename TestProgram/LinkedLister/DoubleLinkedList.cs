@@ -24,7 +24,7 @@ namespace TestProgram.LinkedLister
 
 		public void RemoveNode()
 		{
-			Prev = Next;
+			if (Prev != null) Prev.Next = Next;
 			if (Next != null) Next.Prev = Prev;
 		}
 	}
@@ -60,6 +60,7 @@ namespace TestProgram.LinkedLister
 			else
 			{
 				_tail!.Next = newNode;
+				newNode.Prev = _tail;
 				_tail = newNode;
 			}
 		}
@@ -79,7 +80,7 @@ namespace TestProgram.LinkedLister
 
 			LinkedListNode<T> curr = _head;
 
-			for(int i = 0; i < _length; i++)
+			for(int i = 0; i < _length ; i++)
 			{
 				if (EqualityComparer<T>.Default.Equals(curr!.Value, item)) return true;
 
@@ -196,6 +197,20 @@ namespace TestProgram.LinkedLister
 			if (_head is null || _tail is null)
 			{
 				return false;
+			}
+			if (EqualityComparer<T>.Default.Equals(_head.Value, item))
+			{
+				_length--;
+				_head.RemoveNode();
+				_head = _head.Next;
+				return true;
+			}
+			else if (EqualityComparer<T>.Default.Equals(_tail.Value, item))
+			{
+				_length--;
+				_tail.RemoveNode();
+				_tail = _tail.Prev;
+				return true;
 			}
 
 			LinkedListNode<T> curr = _head;

@@ -4,7 +4,6 @@ using TestProgram.LinkedLister;
 using TestProgram.SearchTrees.BinarySeachTree;
 using TestProgram.SearchTrees.TournamentTree;
 using TestProgram.Threads;
-using xUnitTest.CalculatorTest;
 using TestProgram.PrimeNumbers;
 using TestProgram.Email;
 
