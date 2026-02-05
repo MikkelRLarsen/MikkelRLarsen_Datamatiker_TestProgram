@@ -240,23 +240,67 @@ namespace TestProgram.LinkedLister
 		}
 		public void Enqueue(T item)
 		{
-			throw new NotImplementedException();
+			Add(item);
 		}
-		public void Dequeue()
+		public T? Dequeue()
 		{
-			throw new NotImplementedException(); 
+			if (_head is null) return default;
+
+			_length--;
+			var returnValue = _head.Value;
+			_head.Next = null;
+			_head.Prev = null;
+
+			if (_head.Next is not null) _head.Next.Prev = null;
+
+			_head = _head.Next;
+
+			return returnValue;
 		}
-		public void Peak()
+		public T? Peak()
 		{
-			throw new NotImplementedException();
+			if (_head is null) return default;
+
+			return _head.Value;
 		}
 		public void Append(T item)
 		{
-			throw new NotImplementedException(); 
+			Add(item);
 		}
 		public void Prepend(T item)
 		{
-			throw new NotImplementedException(); 
+			_length++;
+
+			var newNode = new LinkedListNode<T>(item);
+			if (_head is null && _tail is null)
+			{
+				_head = _tail = newNode;
+			}
+			else
+			{
+				_head!.Prev = newNode;
+				newNode.Next = _head;
+				_head = newNode;
+			}
+		}
+		public void Push(T item)
+		{
+			Prepend(item);
+		}
+		public T? Pop(T item)
+		{
+			if (_tail is null) return default;
+
+			_length--;
+			var returnValue = _tail.Value;
+			_tail.Next = null;
+			_tail.Prev = null;
+
+			if (_tail.Prev is not null) _tail.Prev.Next = null;
+
+			_tail = _tail.Prev;
+
+			return returnValue;
 		}
 	}
 }
