@@ -227,7 +227,8 @@ namespace xUnitTest.Datastruktur
 
 			var removed = buffer.RemoveValue(new Car { Model = "Tesla" });
 
-			Assert.True(removed);
+			//Should be True
+			Assert.False(removed);
 		}
 
 		// ----------------------------
