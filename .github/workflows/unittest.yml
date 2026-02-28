@@ -39,6 +39,6 @@ jobs:
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        name: .NET Tests
+        name: Test Results
         path: '**/*.trx'
         reporter: dotnet-trx
