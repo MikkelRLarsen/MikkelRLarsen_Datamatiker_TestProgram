@@ -53,7 +53,7 @@ namespace xUnitTest.CalculatorTest
 			calculator.Clear();
 
 			// Assert
-			Assert.Equal(1, calculator.Accumulator);
+			Assert.Equal(0, calculator.Accumulator);
 		}
 
 		[Theory]
