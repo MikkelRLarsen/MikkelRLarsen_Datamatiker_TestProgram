@@ -162,6 +162,125 @@ namespace xUnitTest.Datastruktur
                 }
             }
         }
+
+        [Fact]
+        public void Enqueue_ConcurrentOperations_HeapRemainsValid()
+        {
+            IMinHeap<int> heap = new MinHeap<int>();
+            int itemCount = 1000;
+
+            // Start 4 samtidige tråde der enqueuer
+            Parallel.For(0, 4, t =>
+            {
+                for (int i = 0; i < itemCount; i++)
+                {
+                    heap.Enqueue(i, i);
+                }
+            });
+
+            // Tæl alle elementer og tjek min-priority
+            int totalCount = 4 * itemCount;
+            int previous = int.MinValue;
+            var results = new List<int>();
+            for (int i = 0; i < totalCount; i++)
+            {
+                int value = heap.Dequeue();
+                Assert.True(value >= previous, $"Heap property violated: {value} < {previous}");
+                previous = value;
+                results.Add(value);
+            }
+
+            // Heap should now be empty
+            Assert.Throws<InvalidOperationException>(() => heap.Dequeue());
+            Assert.Throws<InvalidOperationException>(() => heap.Peek());
+
+            // Alle forventede værdier er med
+            Assert.Equal(totalCount, results.Count);
+        }
+
+        [Fact]
+        public void Dequeue_ConcurrentOperations_HeapRemainsValid()
+        {
+            IMinHeap<int> heap = new MinHeap<int>();
+            int itemCount = 1000;
+
+            // Først fyld heap med elementer
+            for (int i = 0; i < itemCount; i++)
+                heap.Enqueue(i, i);
+
+            var results = new List<int>();
+            object resultsLock = new object();
+
+            // Start 4 samtidige tråde der dequeuer
+            Parallel.For(0, 4, t =>
+            {
+                while (true)
+                {
+                    int value;
+                    try
+                    {
+                        value = heap.Dequeue();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        break; // ingen elementer tilbage
+                    }
+
+                    lock (resultsLock)
+                    {
+                        results.Add(value);
+                    }
+                }
+            });
+
+            // Tjek at alle elementer er returneret i korrekt rækkefølge
+            results.Sort();
+            for (int i = 0; i < itemCount; i++)
+            {
+                Assert.Equal(i, results[i]);
+            }
+        }
+
+        [Fact]
+        public void Mixed_ConcurrentEnqueueDequeue_HeapPropertyMaintained()
+        {
+            IMinHeap<int> heap = new MinHeap<int>();
+            int enqueueCount = 1000;
+            int dequeueCount = 1000;
+
+            Parallel.Invoke(
+                () =>
+                {
+                    for (int i = 0; i < enqueueCount; i++)
+                        heap.Enqueue(i, i);
+                },
+                () =>
+                {
+                    for (int i = 0; i < dequeueCount; i++)
+                    {
+                        try { heap.Dequeue(); }
+                        catch (InvalidOperationException) { } // ignorer tom heap
+                    }
+                }
+            );
+
+            // Efter samtidige operationer må heapen stadig ikke være korrupt
+            while (true)
+            {
+                try
+                {
+                    int current = heap.Dequeue();
+                    if (heap.Peek() != null) // næste element skal være >= current
+                    {
+                        Assert.True(heap.Peek() >= current, "Heap property violated after concurrent operations");
+                    }
+                }
+                catch (InvalidOperationException)
+                {
+                    break;
+                }
+            }
+        }
     }
 }
 

@@ -1,11 +1,12 @@
 ﻿using TestProgram.DesignPatterns.CompositeDesignPattern;
+using TestProgram.Email;
 using TestProgram.Graph.Adjacency_Matrix;
+using TestProgram.Heaps;
 using TestProgram.LinkedLister;
+using TestProgram.PrimeNumbers;
 using TestProgram.SearchTrees.BinarySeachTree;
 using TestProgram.SearchTrees.TournamentTree;
 using TestProgram.Threads;
-using TestProgram.PrimeNumbers;
-using TestProgram.Email;
 
 namespace TestProgram
 {
@@ -26,8 +27,11 @@ namespace TestProgram
             //PrimeNumbers.PrimeNumbersMain.GeneratePrimenumbers(100);
             //PrimeNumbers.PrimeNumbersMain.FibonacciNumber(5);
 
-            EmailSender.SendEmail();
-		}
+            //EmailSender.SendEmail();
+
+            MinHeapBenchmark.RunBenchmark(10000000);
+            MinHeapBenchmark.RunParallelBenchmark(10000000);
+        }
 
 		protected static string GetConnectionString()
 		{
