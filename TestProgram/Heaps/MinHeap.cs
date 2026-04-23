@@ -40,6 +40,24 @@ namespace TestProgram.Heaps
                 return _heap[0].ClassValue;
             }
         }
+        public int GetPeakQueueValue()
+        {
+            lock(_lock)
+            {
+				if (_heap.Count == 0) throw new InvalidOperationException("Heap is empty");
+
+				return _heap[0].Priority;
+			}
+        }
+
+
+		public bool Any()
+        {
+            lock ( _lock )
+            {
+                return _heap.Any();
+            }
+        }
 
         public T Dequeue()
         {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace TestProgram.RingBuffers
 {
-	public class RingBuffer<T> where T : IEquatable<T>
+	public class RingBuffer<T> ///where T : IEquatable<T> If you want to remove a specific Value
 	{
 		private int _head;
 		private int _maxCapacity;
