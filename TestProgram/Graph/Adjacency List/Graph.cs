@@ -49,8 +49,9 @@ namespace TestProgram.Graph.Adjacency_List
 
 	public static class Dijsktra
 	{
-		public static void CalculateDijstra<T>(this Graph<T> graph, Guid startId, Guid needleId) where T : Entity
+		public static DijkstraResult<T> CalculateDijstra<T>(this Graph<T> graph, Guid startId, Guid needleId) where T : Entity
 		{
+			// Before
 			MinHeap<Guid> heap = new MinHeap<Guid>();
 			Dictionary<Guid, DijkstraNode<T>> dict = new Dictionary<Guid, DijkstraNode<T>>();
 
@@ -64,6 +65,7 @@ namespace TestProgram.Graph.Adjacency_List
 				dict.Add(node.Entity.Id, dNode);
 			}
 
+			// Do it
 			while (heap.Any())
 			{
 				DijkstraNode<T>? dNode = GetNextNode<T>(heap, dict);
@@ -89,6 +91,17 @@ namespace TestProgram.Graph.Adjacency_List
 					}
 				}
 			}
+
+			// After
+			if (!dict[needleId].prevNodes.Any()) throw new InvalidOperationException();
+
+			return DijkstraResult<T>.Recursion(
+				dResultDict: new Dictionary<Guid, DijkstraResult<T>>(),
+				dNodeDict: dict,
+				nextNodeId: needleId,
+				currentNodeId: needleId,
+				isNeedle: true)
+				[startId];
 		}
 
 		private static DijkstraNode<T>? GetNextNode<T>(MinHeap<Guid> heap, Dictionary<Guid, DijkstraNode<T>> dict) where T : Entity
@@ -132,13 +145,58 @@ namespace TestProgram.Graph.Adjacency_List
 		{
 			if (weight < pathDistance)
 			{
-				prevNodes = new HashSet<Guid> { nodeGuid };
+				prevNodes.Clear();
+				prevNodes.Add(nodeGuid);
 				pathDistance = weight;
 			}
 			else if (weight == pathDistance)
 			{
 				prevNodes.Add(nodeGuid);
 			}
+		}
+	}
+
+	public class DijkstraResult<T> where T : Entity
+	{
+		public DijkstraResult(GraphNode<T> entity)
+		{
+			Entity = entity;
+		}
+
+		public HashSet<DijkstraResult<T>> NextPotentielTermnials { get; private set; } = new HashSet<DijkstraResult<T>>();
+		public GraphNode<T> Entity { get; private set; }
+
+		public static Dictionary<Guid, DijkstraResult<T>> Recursion<T>(
+			Dictionary<Guid, DijkstraResult<T>> dResultDict, 
+			Dictionary<Guid, DijkstraNode<T>> dNodeDict, 
+			Guid nextNodeId,
+			Guid currentNodeId,
+			bool isNeedle = false) 
+			where T : Entity
+		{
+			// Pre
+			DijkstraNode<T> dNode = dNodeDict[currentNodeId];
+
+			if (dResultDict.ContainsKey(currentNodeId) is false)
+				dResultDict.Add(currentNodeId, new DijkstraResult<T>(dNode.node));
+
+			// Recurse
+			if (dNode.prevNodes.Any())
+			{
+				foreach (Guid nodeId in dNode.prevNodes)
+				{
+					Recursion(dResultDict, dNodeDict, currentNodeId, nodeId);
+				}
+			}
+
+			// Post
+			if (isNeedle is false)
+			{
+				DijkstraResult<T> dResult = dResultDict[currentNodeId];
+				dResult.NextPotentielTermnials.Add(dResultDict[nextNodeId]);
+			}
+
+			return dResultDict;
 		}
 	}
 }
