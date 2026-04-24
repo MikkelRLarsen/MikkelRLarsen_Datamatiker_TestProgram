@@ -65,14 +65,20 @@ namespace TestProgram.Graph.Adjacency_List
 				dict.Add(node.Entity.Id, dNode);
 			}
 
+			// Edge case
+			if (startId == needleId)
+			{
+				if (!dict.ContainsKey(startId))
+					throw new InvalidOperationException("Start node not found in graph");
+
+				return new DijkstraResult<T>(dict[startId].node);
+			}
+
 			// Do it
 			while (heap.Any())
 			{
 				DijkstraNode<T>? dNode = GetNextNode<T>(heap, dict);
 				if (dNode is null)
-					break;
-
-				if (dNode.node.Entity.Id == needleId)
 					break;
 
 				dNode.visited = true;
